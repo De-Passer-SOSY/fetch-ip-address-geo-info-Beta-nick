@@ -39,26 +39,26 @@ q=${city},${region}&format=json`);
         let lat = data[0].lat;
         let lon = data[0].lon;
         displayCoordinates(lat, lon);
-        //fetchWeather(lat, lon)//
+        fetchWeather(lat, lon)
     } catch (error) {
         console.error("Fout bij het ophalen van de coördinaten:", error);
     }
 }
-/*
+
 async function fetchWeather(lat, lon) {
     try{
         let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,rain&forecast_days=1`)
         let data = await response.json();
         let temperature = data.current.temperature_2m
-        if (data.length ===0) throw new Error('Geen informatie beschikbaar')
         let wind = data.current.wind_speed_10m
         let rain = data.current.rain
-        displayWeather(lat, lon)
+        console.log(temperature, rain, wind)
+        displayWeather(temperature, wind, rain)
     } catch(error){
         console.error('Fout bij het ophalen van het weer', error);
     }
 }
-*/
+
 function displayIp(data){
     const container = document.querySelector("#IPcontainer");
     container.innerHTML = 'IP : ' + data.ip;
@@ -73,9 +73,9 @@ function displayCoordinates(lat, lon) {
     const container = document.querySelector("#Coordinates");
     container.innerHTML = 'Coordinates : ' + lat + ' , ' + lon;
 }
-/*
-function displayWeather(lat, lon) {
+
+function displayWeather(temperature, rain, wind) {
     const container = document.querySelector("#Weather");
-    container.innerHTML = 'Coordinates : ' + temperature + ' , ' + wind + ' , ' + rain;
+    container.innerHTML = 'Temperatuur: ' + temperature + ' °C, ' + 'Regen: ' + rain + " mm, wind " + wind + ' km/h';
 }
-*/
+
